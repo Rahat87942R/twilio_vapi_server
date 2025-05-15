@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 
 const initiate = require("./routes/initiate");
 const specialistAnswer = require("./routes/specialistAnswer");
+const twilMlDial = require("./routes/twiml-dial");
 const statusCallback = require("./routes/statusCallback");
 const customerConference = require("./routes/customerConference");
 
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use("/initiate", initiate);
+app.use("/twiml-dial", twilMlDial);
 app.use("/specialist-answer", specialistAnswer);
 app.use("/status-callback", statusCallback);
 app.use("/customer-conference", customerConference);
