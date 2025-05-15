@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
   const callbackUrl = `${baseUrl}/status-callback?room=${room}`;
 
   await client.calls.create({
-    to: process.env.FROM_NUMBER, // Twilio requires a `to`, even if TwiML overrides it
+    to: process.env.TO_NUMBER, // Twilio requires a `to`, even if TwiML overrides it
     from: process.env.FROM_NUMBER,
     url: twimlDialUrl,
     statusCallback: callbackUrl,
