@@ -5,9 +5,17 @@ const store = require("../utils/store");
 
 router.post("/", (req, res) => {
   const room = req.query.room;
+  console.log("📞 /specialist-answer called for room:", room);
+
   const data = store.get(room);
 
-  const specialistNumbers = data?.specialistNumbers || [];
+  if (!data) {
+    console.error("❌ No data found for room:", room);
+    return res.status(404).send("No call data found.");
+  }
+
+  const specialistNumbers = data.specialistNumbers || [];
+  console.log("📞 Calling specialist numbers:", specialistNumbers);
 
   const twiml = new twilio.twiml.VoiceResponse();
   const dial = twiml.dial({
@@ -17,10 +25,14 @@ router.post("/", (req, res) => {
   });
 
   specialistNumbers.forEach(number => {
+    console.log("➡️ Dialing:", number);
     dial.number(number);
   });
 
-  res.type("text/xml").send(twiml.toString());
+  const twimlString = twiml.toString();
+  console.log("📤 Responding with TwiML:", twimlString);
+
+  res.type("text/xml").send(twimlString);
 });
 
 module.exports = router;
