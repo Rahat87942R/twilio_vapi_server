@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
     from: process.env.FROM_NUMBER,
     url: twimlDialUrl,
     statusCallback: callbackUrl,
-    statusCallbackEvent: ['answered', 'completed'],
+    statusCallbackEvent: ['initiated', 'ringing', 'answered', 'completed'],
     statusCallbackMethod: 'POST'
   });
 

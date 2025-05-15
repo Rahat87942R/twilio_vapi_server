@@ -5,7 +5,7 @@ const store = require("../utils/store");
 
 router.post("/", (req, res) => {
   const room = req.query.room;
-  console.log("📞 /specialist-answer called for room:", room);
+  console.log("📞 /twiml-dial called for room:", room);
 
   const data = store.get(room);
 
@@ -19,7 +19,7 @@ router.post("/", (req, res) => {
 
   const twiml = new twilio.twiml.VoiceResponse();
   const dial = twiml.dial({
-    action: `/specialist-answer?room=${room}`,
+    action: `/specialist-answer?room=${room}`, // This will be hit after someone answers
     timeout: 20,
     answerOnBridge: true
   });
