@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
 
   console.log("📞 Specialist Call Status:", callStatus);
 
-  if (callStatus === "answered") {
+  if (callStatus === "in-progress") {
     const data = store.get(room);
 
     if (!data?.customerCallSid) {
