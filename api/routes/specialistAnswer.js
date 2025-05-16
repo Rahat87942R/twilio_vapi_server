@@ -4,18 +4,14 @@ const twilio = require("twilio");
 
 router.post("/", (req, res) => {
   const room = req.query.room;
+  const VoiceResponse = twilio.twiml.VoiceResponse;
+  const twiml = new VoiceResponse();
 
-  console.log("✅ /specialist-answer hit. Room:", room);
-
-  const twiml = new twilio.twiml.VoiceResponse();
-
-  twiml.say("We have a customer for you. Please hold while we connect you.");
+  // Remove "say" to avoid conflict
   twiml.dial().conference({
     startConferenceOnEnter: true,
     endConferenceOnExit: true
   }, room);
-
-  console.log("📤 Responding with specialist join TwiML:", twiml.toString());
 
   res.type("text/xml").send(twiml.toString());
 });
