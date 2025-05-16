@@ -1,3 +1,5 @@
+const express = require("express");
+const router = express.Router();
 const client = require("../lib/twilioClient");
 const store = require("../utils/store");
 
@@ -28,3 +30,5 @@ router.post("/", async (req, res) => {
 
   res.sendStatus(200);
 });
+
+module.exports = router;
